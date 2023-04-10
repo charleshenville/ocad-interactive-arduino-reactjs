@@ -7,32 +7,34 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
+  background-color: #ffeedb;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: 24px;
+  color: rgb(61, 57, 43);
 }
 
 .App-link {
-  color: #61dafb;
+  color: #617bfb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* create two columns with equal width */
+  column-gap: 20px; /* set the gap between columns */
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.topRightSubRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* create two columns with equal width */
+  column-gap: 10px; /* set the gap between columns */
 }
