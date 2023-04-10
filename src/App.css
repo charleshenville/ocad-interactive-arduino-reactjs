@@ -24,8 +24,8 @@
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* create two columns with equal width */
-  column-gap: 20px; /* set the gap between columns */
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
 }
 
 .rightColumn {
@@ -35,6 +35,8 @@
 
 .topRightSubRow {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* create two columns with equal width */
-  column-gap: 10px; /* set the gap between columns */
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
 }

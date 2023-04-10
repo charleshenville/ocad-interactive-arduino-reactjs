@@ -9,7 +9,6 @@ const ImageDisplay = ({ code }) => {
 
     //Image Pre-Loading
     
-
     if (!image) {
         // if image with given code is not found, try to find the closest even code
         const evenCode = String(Number(code) + 1);

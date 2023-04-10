@@ -34,10 +34,6 @@
     z-index: 0;
 }
 
-.trackWrapper:hover {
-    background: #e1e1e1;
-}
-
 .daytimeSubsection {
     display: flex;
     justify-content: center;
@@ -68,10 +64,6 @@
     z-index: 2;
 }
 
-.slider:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -88,4 +80,41 @@
     background: #a7a7a7;
     cursor: pointer;
     border-radius: 4px;
+}
+
+.locOverlay{
+
+    justify-content: center;
+    position: absolute;
+    top: 10;
+    left: 10;
+    right: 10;
+    bottom: 10;
+    height: 56%;
+    width: 95.5%;
+    background: #0000004e;
+    border-radius: 3px;
+    z-index: 5;
+    pointer-events: none;
+
+}
+
+.unlocOverlay{
+
+    justify-content: center;
+    position: absolute;
+    top: 10;
+    left: 10;
+    right: 10;
+    bottom: 10;
+    height: 56%;
+    width: 95.5%;
+    background: #ffffff00;
+    border-radius: 3px;
+    z-index: 3;
+
+}
+
+.unlocOverlay:hover{
+    background: #0000001e;
 }
