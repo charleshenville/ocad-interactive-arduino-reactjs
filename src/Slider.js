@@ -4,6 +4,7 @@ import styles from './Slider.module.css';
 const Slider = ({ min, max, initialValue, onChange }) => {
     const [value, setValue] = useState(initialValue || min);
     const [thumbPosition, setThumbPosition] = useState(0);
+    const [locked, setLocked] = useState(false);
 
     const bufferSize = 20;
 
@@ -13,7 +14,7 @@ const Slider = ({ min, max, initialValue, onChange }) => {
 
         for (let i = 0; i < numberOfLabels; i++) {
             const position = (i / (numberOfLabels - 1)) * 100;
-            const labelValue = 3*i;
+            const labelValue = 3 * i;
 
             labels.push(
                 <div
@@ -42,6 +43,12 @@ const Slider = ({ min, max, initialValue, onChange }) => {
         if (onChange) {
             onChange(event.target.value);
         }
+        if ([10, 14, 18].includes(parseInt(event.target.value)) && !locked) {
+            setLocked(true);
+            setTimeout(() => {
+                setLocked(false);
+            }, 5000);
+        }
     };
 
     const daytimeSubsectionMin = 10;
@@ -55,6 +62,8 @@ const Slider = ({ min, max, initialValue, onChange }) => {
     return (
         <div className={styles.sliderContainer}>
             <div className={styles.trackWrapper}>
+                {locked && <div className={styles.locOverlay}></div>}
+                
                 <div
                     className={styles.daytimeSubsection}
                     style={{
@@ -76,6 +85,7 @@ const Slider = ({ min, max, initialValue, onChange }) => {
                     max={max || 24}
                     value={value}
                     onChange={handleChange}
+                    disabled={locked}
                 />
             </div>
             <div className={styles.axisLabelContainer}>{generateLabels()}</div>
