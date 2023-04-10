@@ -1,0 +1,24 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.widgetWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 127px;
+    height: 108px;
+}
+
+.widget {
+    max-width: 127px;
+    max-height: 108px;
+    border-radius: 5px;
+}

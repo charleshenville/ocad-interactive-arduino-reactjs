@@ -1,0 +1,14 @@
+.widgetWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 70px;
+    height: 110px;
+}
+
+.widget {
+    max-width: 70px;
+    max-height: 100px;
+    border-radius: 5px;
+}
