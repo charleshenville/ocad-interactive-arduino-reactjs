@@ -43,11 +43,11 @@ const Slider = ({ min, max, initialValue, onChange }) => {
         if (onChange) {
             onChange(event.target.value);
         }
-        if ([10, 14, 18].includes(parseInt(event.target.value)) && !locked) {
+        if ([13, 17].includes(parseInt(event.target.value)) && !locked) {
             setLocked(true);
             setTimeout(() => {
                 setLocked(false);
-            }, 5000);
+            }, 10000);
         }
     };
 

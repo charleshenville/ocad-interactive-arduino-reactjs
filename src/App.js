@@ -17,11 +17,11 @@ function App() {
     console.log('Slider value:', value);
     setSliderValue(value);
 
-    if (value >= 10 && value <= 14) {
+    if (value >= 10 && value < 14) {
       setWidValue(1);
       setWeatherValue(4);
     }
-    else if (value > 14 && value <= 18) {
+    else if (value >= 14 && value < 18) {
       setWidValue(2);
       setWeatherValue(4);
       if (value > 15) {
@@ -30,7 +30,7 @@ function App() {
     }
     else {
       setWidValue(3);
-      if ((value > 5 && value < 10) || (value > 18 && value < 20)) {
+      if ((value > 5 && value < 10) || (value >= 18 && value < 20)) {
         setWeatherValue(2);
       }
       else {
