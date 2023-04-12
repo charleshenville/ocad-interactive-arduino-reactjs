@@ -1,0 +1,44 @@
+.container {
+
+    background: #5d5246;
+    width: 100%;
+    min-height: 8vh;
+    text-align: left;
+    color: rgb(206, 197, 166);
+    
+}
+
+.git {
+
+    
+    justify-content: center;
+    display: flex;
+
+}
+.gitimg {
+
+    display: block;
+    margin-top: 5%;
+    width: 6vh;
+    height: 6vh;
+    justify-content: center;
+    filter: grayscale(100%);
+    opacity: 0.5;
+
+}
+
+.grid {
+    display: grid;
+    min-height: 8vh;
+    grid-template-columns: 12fr 1fr;
+    column-gap: 0px;
+    justify-content: center;
+}
+
+.txt{
+
+    margin-top: 1.5%;
+    margin-left: 10px;
+    justify-content: left;
+    font-size: 19px;
+}
