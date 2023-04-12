@@ -6,6 +6,7 @@ import ImageDisplay from './ImageDisplay';
 import WidgetDisplay from './WidgetDisplay';
 import WeatherData from './WeatherData';
 import WeatherWidget from './WeatherWidget';
+import MenuBar from './MenuBar';
 
 function App() {
 
@@ -41,14 +42,17 @@ function App() {
 
   return (
     <div className="App">
+
+      <MenuBar />
       <header className="App-header">
+
         <div className="container">
           <ImageDisplay code={sliderValue} />
           <div className="rightColumn">
 
             <div className="topRightSubRow">
               <WidgetDisplay value={widValue} />
-              <WeatherWidget value={weatherValue}/>
+              <WeatherWidget value={weatherValue} />
               <WeatherData hour={sliderValue} />
             </div>
 
