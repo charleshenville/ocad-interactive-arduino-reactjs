@@ -2,7 +2,7 @@
 
 #define PIN 6
 #define NUMPIXELS 24
-#define TIME_PER_PERCENT 100
+#define TIME_PER_PERCENT 20
 #define FLASHSLO 0
 #define AMT 1
 #define TIME_PER_HALFHOUR 1000

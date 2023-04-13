@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Slider.module.css';
 
-const Slider = ({ min, max, initialValue, onChange }) => {
+const Slider = ({ min, max, initialValue, onChange, disabled, thumbPosition }) => {
     const [value, setValue] = useState(initialValue || min);
-    const [thumbPosition, setThumbPosition] = useState(0);
     const [locked, setLocked] = useState(false);
 
     const bufferSize = 20;
@@ -14,7 +13,10 @@ const Slider = ({ min, max, initialValue, onChange }) => {
 
         for (let i = 0; i < numberOfLabels; i++) {
             const position = (i / (numberOfLabels - 1)) * 100;
-            const labelValue = 3 * i;
+            let labelValue = 3 * i;
+            let ampm = labelValue < 12 ? 'am' : 'pm';
+            if (labelValue == 24) { ampm = 'am'; }
+            if (labelValue == 24 || labelValue == 0) { labelValue = 12; }
 
             labels.push(
                 <div
@@ -24,7 +26,7 @@ const Slider = ({ min, max, initialValue, onChange }) => {
                         left: `${position}%`,
                     }}
                 >
-                    {labelValue}
+                    {String(labelValue <= 12 ? labelValue : labelValue-12)+ampm}
                 </div>
             );
         }
@@ -33,17 +35,16 @@ const Slider = ({ min, max, initialValue, onChange }) => {
     };
 
     useEffect(() => {
-        const position = ((value - min) / (max - min)) * 100;
-        const adjustedPosition = position * ((100 - 2 * bufferSize) / 100) + bufferSize;
-        setThumbPosition(adjustedPosition);
-    }, [value, min, max]);
+        document.documentElement.style.setProperty('--thumb-position', `${thumbPosition}%`);
+
+    }, [value, min, max, thumbPosition]);
 
     const handleChange = (event) => {
         setValue(event.target.value);
         if (onChange) {
             onChange(event.target.value);
         }
-        if ([13, 17].includes(parseInt(event.target.value)) && !locked) {
+        if (([13, 17].includes(parseInt(event.target.value)) && !locked)||disabled) {
             setLocked(true);
             setTimeout(() => {
                 setLocked(false);
@@ -63,7 +64,7 @@ const Slider = ({ min, max, initialValue, onChange }) => {
         <div className={styles.sliderContainer}>
             <div className={styles.trackWrapper}>
                 {locked && <div className={styles.locOverlay}></div>}
-                
+
                 <div
                     className={styles.daytimeSubsection}
                     style={{
@@ -86,6 +87,7 @@ const Slider = ({ min, max, initialValue, onChange }) => {
                     value={value}
                     onChange={handleChange}
                     disabled={locked}
+                    style={{ '--thumb-position': `${thumbPosition}%` }}
                 />
             </div>
             <div className={styles.axisLabelContainer}>{generateLabels()}</div>

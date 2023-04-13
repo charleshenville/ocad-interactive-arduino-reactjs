@@ -4,11 +4,20 @@
     align-items: center;
     width: 347px;
     height: 347px;
+    margin: 0px;
 }
 
 .image {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 347px;
+    max-height: 347px;
     border-radius: 5px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.phone{
+    mask-type:alpha;
+}
+
+.invisible{
+    visibility: hidden;
 }
