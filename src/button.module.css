@@ -1,0 +1,56 @@
+.demo {
+    width: 75px;
+    /* Adjust the width and height to the desired size */
+    height: 75px;
+    background: transparent;
+    border: 1px solid transparent;
+} 
+
+.demo:disabled {
+    cursor: not-allowed;
+}
+
+.peak {
+    width: 75px;
+    /* Adjust the width and height to the desired size */
+    height: 75px;
+    background-color: #F8D05D;
+    /* Customize the background color */
+    border: 1px solid transparent;
+    border-radius: 50%;
+}
+
+.peak:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.last {
+    width: 75px;
+    /* Adjust the width and height to the desired size */
+    height: 75px;
+    background-color: #D7B0B0;
+    /* Customize the background color */
+    border: 1px solid transparent;
+    border-radius: 50%;
+}
+
+.last:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.off {
+    width: 75px;
+    /* Adjust the width and height to the desired size */
+    height: 75px;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    /* Customize the background color */
+    border-radius: 50%;
+}
+
+.off:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
