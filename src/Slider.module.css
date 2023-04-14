@@ -1,9 +1,14 @@
+:root {
+    --thumb-position: 0%;
+}
+
 .sliderContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
+    --thumb-position: 100%;
 }
 
 .axisLabelContainer {
@@ -19,7 +24,7 @@
 .label {
     position: absolute;
     transform: translateX(-50%);
-    font-size: 18px;
+    font-size: 12px;
 }
 
 .trackWrapper {
@@ -56,7 +61,7 @@
 
 .slider {
     -webkit-appearance: none;
-    width: 420px;
+    width: 330px;
     height: 31px;
     background: transparent;
     border-radius: 3px;
@@ -70,19 +75,23 @@
     width: 37px;
     height: 17px;
     background: #a7a7a7;
-    cursor: pointer;
+    cursor: not-allowed;
     border-radius: 4px;
+    position: relative;
+    left: var(--thumb-position);
 }
 
 .slider::-moz-range-thumb {
     width: 37px;
     height: 17px;
     background: #a7a7a7;
-    cursor: pointer;
+    cursor: not-allowed;
     border-radius: 4px;
+    position: relative;
+    left: var(--thumb-position);
 }
 
-.locOverlay{
+.locOverlay {
 
     justify-content: center;
     position: absolute;
@@ -92,29 +101,13 @@
     bottom: 10;
     height: 56%;
     width: 95.5%;
-    background: #0000004e;
+    background: #00000000;
     border-radius: 3px;
     z-index: 5;
     pointer-events: none;
 
 }
 
-.unlocOverlay{
-
-    justify-content: center;
-    position: absolute;
-    top: 10;
-    left: 10;
-    right: 10;
-    bottom: 10;
-    height: 56%;
-    width: 95.5%;
-    background: #ffffff00;
-    border-radius: 3px;
-    z-index: 3;
-
-}
-
-.unlocOverlay:hover{
+.unlocOverlay:hover {
     background: #0000001e;
 }
