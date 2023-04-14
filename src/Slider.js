@@ -3,7 +3,7 @@ import styles from './Slider.module.css';
 
 const Slider = ({ min, max, initialValue, onChange, disabled, thumbPosition }) => {
     const [value, setValue] = useState(initialValue || min);
-    const [locked, setLocked] = useState(false);
+    const [locked, setLocked] = useState(true);
 
     const bufferSize = 20;
 

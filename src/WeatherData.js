@@ -7,9 +7,9 @@ function WeatherData({ hour }) {
     const exportstring = String(may15data[hour])+"°";
 
     return (
-    <div>
-        <div>Toronto</div>
-        <div>100 McCaul St</div>
+    <div className={styles.margin}>
+        <div className={styles.location}>Toronto</div>
+        <div className={styles.subLoc}>100 McCaul St</div>
         <div className={styles.main}>{exportstring}</div>
     </div>
     

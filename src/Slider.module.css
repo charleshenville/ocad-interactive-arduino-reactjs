@@ -75,7 +75,7 @@
     width: 37px;
     height: 17px;
     background: #a7a7a7;
-    cursor: pointer;
+    cursor: not-allowed;
     border-radius: 4px;
     position: relative;
     left: var(--thumb-position);
@@ -85,7 +85,7 @@
     width: 37px;
     height: 17px;
     background: #a7a7a7;
-    cursor: pointer;
+    cursor: not-allowed;
     border-radius: 4px;
     position: relative;
     left: var(--thumb-position);
@@ -101,26 +101,10 @@
     bottom: 10;
     height: 56%;
     width: 95.5%;
-    background: #0000004e;
+    background: #00000000;
     border-radius: 3px;
     z-index: 5;
     pointer-events: none;
-
-}
-
-.unlocOverlay {
-
-    justify-content: center;
-    position: absolute;
-    top: 10;
-    left: 10;
-    right: 10;
-    bottom: 10;
-    height: 56%;
-    width: 95.5%;
-    background: #ffffff00;
-    border-radius: 3px;
-    z-index: 3;
 
 }
 

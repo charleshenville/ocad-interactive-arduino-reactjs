@@ -22,6 +22,7 @@ function App() {
   const [demoVisible, setDemoVisible] = useState(false);
   const [demoIndex, setDemoIndex] = useState(0);
   const [thumbPos, setThumbPos] = useState(0);
+  const [weatherString, setweatherString] = useState('Night');
 
   function wait(delay) {
     return new Promise(resolve => setTimeout(resolve, delay));
@@ -30,20 +31,23 @@ function App() {
   const handleSliderChange = (value) => {
     console.log('Slider value:', value);
     setSliderValue(value);
-    setThumbPos((value/25)*100-value*0.1);
+    setThumbPos((value / 25) * 100 - value * 0.1);
 
     if (value >= 10 && value < 14) {
       setWeatherValue(4);
+      setweatherString('Full Sun');
     }
     else if (value >= 14 && value < 18) {
       setWeatherValue(4);
       if (value > 15) {
         setWeatherValue(3);
+        setweatherString('Partial Sun');
       }
     }
     else {
       if ((value > 5 && value < 10) || (value >= 18 && value < 20)) {
         setWeatherValue(2);
+        setweatherString(value < 10 ? 'Sunrise' : 'Sunset');
       }
       else {
         setWeatherValue(1);
@@ -135,7 +139,7 @@ function App() {
               <div className="buttonBox">
 
                 <div className='middleColumn'>
-                  <svg width="69" height="80" viewBox="0 0 69 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="50" height="65" viewBox="0 0 69 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M69 40L3.87733e-06 79.8372L7.36001e-06 0.162827L69 40Z" fill="#D9D9D9" />
                   </svg>
                   <div className='demoOverlay'>
@@ -157,7 +161,10 @@ function App() {
             </div>
 
             <div className="demoRow">
-              <DemoWidget index={demoIndex} visible={demoVisible} />
+
+              <div className='justifyRight'>
+                <DemoWidget index={demoIndex} visible={demoVisible} />
+              </div>
               <div className='justifyRight'>
                 <Vector demoVisible={demoVisible} />
               </div>
@@ -175,16 +182,21 @@ function App() {
 
                 <WeatherData hour={sliderValue} />
 
-                <div>
+                <div className='weather'>
                   <WeatherWidget value={weatherValue} />
+                  <div style={{ color: "#3D3D3D", fontWeight: "bold" }}>{weatherString}</div>
                 </div>
 
               </div>
-              <ImageDisplay code={sliderValue} />
-              <div className='timelineTxt'>
-                <h1>Sun Break Timeline</h1>
+
+              <div className='phoneSub'>
+                <ImageDisplay code={sliderValue} />
+                <div className='timelineTxt'>
+                  <h1>Sun Break Timeline</h1>
+                </div>
+                <Slider min={0} max={24} initialValue={0} onChange={handleSliderChange} disabled={sliderDisabled} thumbPosition={thumbPos} />
               </div>
-              <Slider min={0} max={24} initialValue={0} onChange={handleSliderChange} disabled={sliderDisabled} thumbPosition={thumbPos} />
+
 
             </div>
 

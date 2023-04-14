@@ -10,3 +10,12 @@
 .gray{
     color: #C1C1C1;
 }
+
+.generalSans{
+    font-family: 'General Sans';
+}
+
+.subTitle{
+    font-family: 'General Sans';
+    font-size: 36px;
+}

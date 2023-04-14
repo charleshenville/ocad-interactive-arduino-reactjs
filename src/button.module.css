@@ -1,8 +1,9 @@
 .demo {
-    width: 75px;
+    width: 100px;
     /* Adjust the width and height to the desired size */
     height: 75px;
     background: transparent;
+    cursor: pointer;
     border: 1px solid transparent;
 } 
 
@@ -11,10 +12,11 @@
 }
 
 .peak {
-    width: 75px;
+    width: 65px;
     /* Adjust the width and height to the desired size */
-    height: 75px;
+    height: 65px;
     background-color: #F8D05D;
+    cursor: pointer;
     /* Customize the background color */
     border: 1px solid transparent;
     border-radius: 50%;
@@ -26,10 +28,11 @@
 }
 
 .last {
-    width: 75px;
+    width: 65px;
     /* Adjust the width and height to the desired size */
-    height: 75px;
+    height: 65px;
     background-color: #D7B0B0;
+    cursor: pointer;
     /* Customize the background color */
     border: 1px solid transparent;
     border-radius: 50%;
@@ -41,11 +44,12 @@
 }
 
 .off {
-    width: 75px;
+    width: 65px;
     /* Adjust the width and height to the desired size */
-    height: 75px;
+    height: 65px;
     background-color: #ffffff;
     border: 1px solid #000000;
+    cursor: pointer;
     /* Customize the background color */
     border-radius: 50%;
 }
@@ -53,4 +57,12 @@
 .off:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
+}
+
+.centered {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }

@@ -3,6 +3,8 @@ import styles from './button.module.css';
 
 const Button = ({ index, onClick, disabled }) => {
   return (
+
+    <div className={styles.centered}>
     <button
       type='button'
       onClick={onClick}
@@ -10,6 +12,9 @@ const Button = ({ index, onClick, disabled }) => {
       className={styles[index]}
     >
     </button>
+    </div>
+    
+
   );
 };
 
