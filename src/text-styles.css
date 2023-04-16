@@ -2,6 +2,11 @@
     justify-content: left;
     text-align: left;
 }
+.alignBottom{
+    justify-content: left;
+    text-align: left;
+    align-items:flex-end;
+}
 
 .orange{
     color: #BA754A;

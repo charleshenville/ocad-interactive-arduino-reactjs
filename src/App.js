@@ -12,6 +12,7 @@ import PhoneSVG from './PhoneSVG';
 import Button from './Button';
 import DemoWidget from './DemoWidget';
 import Vector from './Vector';
+import Timer from './Timer';
 
 function App() {
 
@@ -24,6 +25,9 @@ function App() {
   const [thumbPos, setThumbPos] = useState(0);
   const [toESP, setToESP] = useState(0);
   const [weatherString, setweatherString] = useState('Night');
+  const [lastButton, setlastButton] = useState(4);
+  const [isTimer, setIsTimer] = useState(false);
+  const [timerVal, setTimerVal] = useState(74);
 
   function wait(delay) {
     return new Promise(resolve => setTimeout(resolve, delay));
@@ -48,7 +52,8 @@ function App() {
     else {
       if ((value > 5 && value < 10) || (value >= 18 && value < 20)) {
         setWeatherValue(2);
-        setweatherString(value < 10 ? 'Sunrise' : 'Sunset');
+        let parse = value < 10 ? 'Sunrise' : 'Sunset'
+        setweatherString(parse);
       }
       else {
         setWeatherValue(1);
@@ -56,10 +61,41 @@ function App() {
     }
   };
 
-  async function handleDemoClick() {
+  async function countdown(){
 
-    setToESP(1);
+    let count = 0;
+    let current = 0;
+    setTimerVal(74);
+    while(count<74){
+
+      current = Math.abs(74-count);
+      setTimerVal(current);
+      console.log(count);
+      await wait(1000);
+      count=count+1;
+
+    }
+    
+  }
+
+  async function demoDiff(){
+    console.log("demodiffn");
+    setweatherString('Night');
     setButtonsDisabled(true);
+    setIsTimer(true);
+
+    console.log(lastButton);
+    if (lastButton == 1 || lastButton == 4) {
+      setToESP(4);
+      await wait(500);
+    }
+    
+    if (lastButton == 2 || lastButton == 3) {
+      setToESP(4);
+      await wait(1000);
+    }
+
+
     let i = 1;
     while (i < 25) {
 
@@ -75,7 +111,8 @@ function App() {
       console.log(i);
       if (i == 3) {
         setDemoIndex(0);
-        await wait(2000);
+        await wait(5000);
+        setToESP(1);
       }
       else if (i == 10) {
         setDemoIndex(1);
@@ -83,19 +120,19 @@ function App() {
       }
       else if (i == 13) {
         setDemoIndex(2);
-        await wait(2000);
+        await wait(11000);
         setDemoIndex(3);
-        await wait(2000);
+        await wait(12000);
       }
       else if (i == 14) {
         setDemoIndex(4);
-        await wait(2000);
+        await wait(4000);
       }
       else if (i == 17) {
         setDemoIndex(5);
-        await wait(2000);
+        await wait(11000);
         setDemoIndex(6);
-        await wait(2000);
+        await wait(12000);
       }
       else if (i == 18) {
         setDemoIndex(7);
@@ -106,26 +143,50 @@ function App() {
         await wait(2000);
       }
 
+      else if (i > 10 && i <= 16) {
+        await wait(2000);
+      }
       else {
-        await wait(500);
+        await wait(400);
       }
       i = i + 1;
     }
 
     handleSliderChange(0);
+    setweatherString('Night');
+    setlastButton(1);
+    setIsTimer(false);
     setButtonsDisabled(false);
   }
-  function handlePeakClick() {
+  async function handleDemoClick() {
+
+    await Promise.all([demoDiff(), countdown()]);
+
+  }
+  async function handlePeakClick() {
+    setButtonsDisabled(true);
     setToESP(2);
     handleSliderChange(11);
+    await wait(1000);
+    setlastButton(2);
+    setButtonsDisabled(false);
   }
-  function handleLastClick() {
+  async function handleLastClick() {
+    setButtonsDisabled(true);
     setToESP(3);
     handleSliderChange(16);
+    await wait(1000);
+    setlastButton(3);
+    setButtonsDisabled(false);
   }
-  function handleOffClick() {
+  async function handleOffClick() {
+    setButtonsDisabled(true);
     setToESP(4);
     handleSliderChange(0);
+
+    await wait(1000);
+    setlastButton(4);
+    setButtonsDisabled(false);
   }
 
   return (
@@ -148,7 +209,7 @@ function App() {
                     <path d="M69 40L3.87733e-06 79.8372L7.36001e-06 0.162827L69 40Z" fill="#D9D9D9" />
                   </svg>
                   <div className='demoOverlay'>
-                    <Button index='demo' onClick={handleDemoClick} disabled={buttonsDisabled} />
+                    <Button index='demo' onClick={handleDemoClick} disabled={buttonsDisabled}/>
                   </div>
                 </div>
 
@@ -158,7 +219,7 @@ function App() {
               </div>
 
               <div className="buttonText">
-                <div>Demo</div>
+                <Timer active={isTimer} secsRemain={timerVal}/>
                 <div>Peak</div>
                 <div>Last Call</div>
                 <div>Off</div>
@@ -207,7 +268,7 @@ function App() {
 
           </div>
 
-          <div>
+          <div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: '10%' }}>
             <GradExTxt />
           </div>
 

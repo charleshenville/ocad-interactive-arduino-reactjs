@@ -2,11 +2,11 @@
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 
-// const char* ssid     = "SadeHuh";
-// const char* password = "slimmsade21";
+const char* ssid     = "SadeHuh";
+const char* password = "slimmsade21";
 
-const char* ssid     = "samuraiwifi";
-const char* password = "A336A379DE6F"; 
+// const char* ssid     = "samuraiwifi";
+// const char* password = "A336A379DE6F"; 
 
 
 ESP8266WebServer server(80);
