@@ -2,10 +2,10 @@
 
 #define PIN 6
 #define NUMPIXELS 24
-#define TIME_PER_PERCENT 20
-#define FLASHSLO 0
+#define TIME_PER_PERCENT 15
+#define FLASHSLO 10
 #define AMT 1
-#define TIME_PER_HALFHOUR 1000
+#define TIME_PER_HALFHOUR 4000
 
 // #ifdef __AVR__
 // #include <avr/power.h>
@@ -28,15 +28,11 @@ void iterateThruPercent(int numList, int maxPercent, int last, int * lastColour)
     if(last > maxPercent){
       flag=-1;
     }
-    else if(last==maxPercent){
-      delay(50*TIME_PER_PERCENT);
-      return;
-    }
 
     if(numList <=6){
 
         if(*lastColour !=1){fadeToColor(pixels.Color((int)(((double)(last)/100)*252), (int)(((double)(last)/100)*124), (int)(((double)(last)/100)*214)), 
-                                        pixels.Color((int)(((double)(last)/100)*250), (int)(((double)(last)/100)*155), (int)(((double)(last)/100)*0)), 60);}
+                                        pixels.Color((int)(((double)(last)/100)*250), (int)(((double)(last)/100)*155), (int)(((double)(last)/100)*0)), 40);}
         (*lastColour) = 1;
 
         for(int per = last; ((per < maxPercent && flag == 1) || (per > maxPercent && flag ==-1)); per+=flag)
@@ -51,7 +47,7 @@ void iterateThruPercent(int numList, int maxPercent, int last, int * lastColour)
     else{
 
         if(*lastColour != 2){fadeToColor(pixels.Color((int)(((double)(last)/100)*250), (int)(((double)(last)/100)*155), (int)(((double)(last)/100)*0)), 
-                                        pixels.Color((int)(((double)(last)/100)*252), (int)(((double)(last)/100)*124), (int)(((double)(last)/100)*214)), 60);}
+                                        pixels.Color((int)(((double)(last)/100)*252), (int)(((double)(last)/100)*124), (int)(((double)(last)/100)*214)), 40);}
         (*lastColour) = 2;
 
         for(int per = last; (((per < maxPercent) && (flag == 1)) || ((per > maxPercent) && (flag ==-1))); per+=flag)
@@ -96,10 +92,10 @@ void initYellow(int intensity){
   for(int i =0 ; i<NUMPIXELS; i++){
 
     pixels.setPixelColor(i, R, G, B);
-    pixels.setBrightness(intensity);
-    pixels.show();
 
   }
+    pixels.setBrightness(intensity);
+    pixels.show();
 }
 
 void initPurple(int intensity){
@@ -110,17 +106,17 @@ void initPurple(int intensity){
   for(int i =0 ; i<NUMPIXELS; i++){
 
     pixels.setPixelColor(i, R, G, B);
-    pixels.setBrightness(intensity);
-    pixels.show();
 
   }
+    pixels.setBrightness(intensity);
+    pixels.show();
 }
 
-void dimBrighten(int waitDim, int direction, int volume, int colour){
+void dimBrighten(int direction, int volume, int colour){
   //dim until off if direction is -1
   //brighten to colour if 1
 
-  volume = ((double)(255)*((double)volume/(double)100));
+  volume = (255*volume)/100;
   if(direction < 0)
   {
     for (int brightness = volume; brightness >= 0; brightness--) 
@@ -131,8 +127,8 @@ void dimBrighten(int waitDim, int direction, int volume, int colour){
       else{
         initPurple(brightness);
       }
-      pixels.show();
-      delay(waitDim);
+      // pixels.show();
+      delay(FLASHSLO);
     }
   }
   else{
@@ -144,21 +140,18 @@ void dimBrighten(int waitDim, int direction, int volume, int colour){
       else{
         initPurple(brightness);
       }
-      pixels.show();
-      delay(waitDim);
+      // pixels.show();
+      delay(FLASHSLO);
     }
   }
 }
 
 void thruHalfHours(int i, int last, int lastColour, int numFlashes)
 {
-  
-  for(int k = 0; k<numFlashes; k++){
-    dimBrighten(FLASHSLO, -1, last, lastColour);
-    dimBrighten(FLASHSLO, 1, last, lastColour);
+  for(int k = 0; k<(numFlashes); k++){
+    dimBrighten(-1, last, lastColour);
+    dimBrighten(1, last, lastColour);
   }
-  delay(TIME_PER_HALFHOUR);
-      
 }
 void setup()
 {
@@ -185,60 +178,81 @@ void loop()
     int i = 0;
     int flashflag = 0;
     int mod = 0;
-    int genuineIndex = 0;
+    int idx = 0;
     
     if (Serial.available()) {
         // Serial.write(Serial.read());
         int j = Serial.parseInt();
       
-        if(j!=0){
-          genuineIndex = j;
-          i=(j/2);
-        }
+        idx=j;
 
-        Serial.println(j);    
-        received = 1;
+        Serial.println(j);
     }
 
-    if(i>0 && i<=13 && received==1 && lastIndex != i)
-    {
-      if (rawList[i] >= 0.3 && rawList[i] <= 0.5)
+    if(idx==1){
+      for(int i = 0; i<13; i++)
       {
-        iterateThruPercent(i, 50, last, &lastColour);
-        last = 50;
+        if (rawList[i] >= 0.3 && rawList[i] <= 0.5)
+        {
+          iterateThruPercent(i, 50, last, &lastColour);
+          last = 50;
 
-        if((genuineIndex==13||genuineIndex==17)&&flashflag == 0){
-          thruHalfHours(i, last, lastColour, 2);
-          delay(TIME_PER_HALFHOUR);
-          thruHalfHours(i, last, lastColour, 4);
-          flashflag == 1;
+          if(i==6||i==8){
+
+            thruHalfHours(i, last, lastColour, 2);
+            delay(TIME_PER_HALFHOUR);
+            thruHalfHours(i, last, lastColour, 4);
+          }
+          
         }
+        else if (rawList[i] > 0.5)
+        {
+          iterateThruPercent(i, 100, last, &lastColour);
+          last = 100;
 
-        lastIndex = i;
-        
+          if(i==6||i==8){
+            iterateThruPercent(i, 50, last, &lastColour);
+            last = 50;
+            thruHalfHours(i, last, lastColour, 2);
+            delay(TIME_PER_HALFHOUR);
+            thruHalfHours(i, last, lastColour, 4);
+            iterateThruPercent(i, 100, last, &lastColour);
+            last = 100;
+          }
+
+        }
+        else
+        {
+          if(last != 0){
+            dimBrighten(-1, last, lastColour);
+            last = 0;
+          }
+          else{
+            delay(200);
+          }
+        }
+        if (Serial.available()) {
+        // Serial.write(Serial.read());
+        int j = Serial.parseInt();
+        Serial.println(j);
+        if(j!=0){break;}
+        }
       }
-      else if (rawList[i] > 0.5)
-      {
-        iterateThruPercent(i, 100, last, &lastColour);
-        last = 100;
-
-        if((genuineIndex==13||genuineIndex==17)&&flashflag == 0){
-          thruHalfHours(i, last, lastColour, 2);
-          delay(TIME_PER_HALFHOUR);
-          thruHalfHours(i, last, lastColour, 4);
-          flashflag == 1;
-        }
-
-        lastIndex = i;
-        
-      }
-      else
-      {
-        if(last != 0){
-          dimBrighten(FLASHSLO, -1, last, lastColour);
-          last = 0;
-          lastIndex = i;
-        }
+      
+    }
+    if(idx==2){
+      iterateThruPercent(5, 100, last, &lastColour);
+      last=100;
+    }
+    else if(idx==3){
+      iterateThruPercent(7, 100, last, &lastColour);
+      last=100;
+    }
+    else if(idx==4){
+      if(last != 0){
+        dimBrighten(-1, last, lastColour);
+        last = 0;
       }
     }
+    
 }

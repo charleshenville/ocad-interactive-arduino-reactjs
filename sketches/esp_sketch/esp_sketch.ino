@@ -2,9 +2,12 @@
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 
-const char* ssid     = "SadeHuh";         // The SSID (name) of the Wi-Fi network you want to connect to
-// const char* username = "sade.huh"
-const char* password = "slimmsade21";     // The password of the Wi-Fi network
+// const char* ssid     = "SadeHuh";
+// const char* password = "slimmsade21";
+
+const char* ssid     = "samuraiwifi";
+const char* password = "A336A379DE6F"; 
+
 
 ESP8266WebServer server(80);
 

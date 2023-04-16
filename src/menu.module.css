@@ -1,23 +1,23 @@
 .container {
 
-    background: #5d5246;
+    background: rgb(61,64,69);
     width: 100%;
     min-height: 8vh;
     text-align: left;
-    color: rgb(206, 197, 166);
+    color: rgba(255, 253, 245, 0.453);
     
 }
 
 .git {
     
     justify-content: center;
+    align-items: center;
     display: flex;
 
 }
 .gitimg {
 
     display: block;
-    margin-top: 5%;
     width: 6vh;
     height: 6vh;
     justify-content: center;
@@ -35,9 +35,18 @@
 }
 
 .txt{
+    font-family: "General Sans";
+    margin-bottom: 1.5%;
+    margin-left: 10px;
+    justify-content: left;
+    font-size: 19px;
+}
 
+.txtBolded{
+    font-family: "General Sans";
     margin-top: 1.5%;
     margin-left: 10px;
     justify-content: left;
     font-size: 19px;
+    font-weight: bold;
 }

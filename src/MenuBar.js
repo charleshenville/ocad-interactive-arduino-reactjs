@@ -9,7 +9,11 @@ function MenuBar() {
 
             <div className={styles.grid}>
 
-                <h1 className={styles.txt}>"SunSet Lamp" Demo by Charles Henville</h1>
+                <div>
+                    <div className={styles.txtBolded}>"SunSet Lamp" Demo</div>
+                    <div className={styles.txt}>[Development: Charles Henville] [Design: Sade Huh]</div>
+                </div>
+
                 <a className={styles.git} target="_blank" href="https://github.com/charleshenville/ocad-interactive-arduino-reactjs">
                     <img src={gitmainurl} alt="GitHub" className={styles.gitimg}></img>
                 </a>
