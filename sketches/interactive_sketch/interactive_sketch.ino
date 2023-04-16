@@ -31,8 +31,13 @@ void iterateThruPercent(int numList, int maxPercent, int last, int * lastColour)
 
     if(numList <=6){
 
-        if(*lastColour !=1){fadeToColor(pixels.Color((int)(((double)(last)/100)*252), (int)(((double)(last)/100)*124), (int)(((double)(last)/100)*214)), 
-                                        pixels.Color((int)(((double)(last)/100)*250), (int)(((double)(last)/100)*155), (int)(((double)(last)/100)*0)), 40);}
+        if(*lastColour !=1)
+        {
+          if(last!=0){
+            fadeToColor(pixels.Color((int)(((double)(last)/100)*252), (int)(((double)(last)/100)*124), (int)(((double)(last)/100)*214)), 
+            pixels.Color((int)(((double)(last)/100)*250), (int)(((double)(last)/100)*155), (int)(((double)(last)/100)*0)), 40);
+          }
+        }
         (*lastColour) = 1;
 
         for(int per = last; ((per < maxPercent && flag == 1) || (per > maxPercent && flag ==-1)); per+=flag)
@@ -46,8 +51,15 @@ void iterateThruPercent(int numList, int maxPercent, int last, int * lastColour)
     }
     else{
 
-        if(*lastColour != 2){fadeToColor(pixels.Color((int)(((double)(last)/100)*250), (int)(((double)(last)/100)*155), (int)(((double)(last)/100)*0)), 
-                                        pixels.Color((int)(((double)(last)/100)*252), (int)(((double)(last)/100)*124), (int)(((double)(last)/100)*214)), 40);}
+        if(*lastColour != 2)
+        {
+          if(last!=0)
+          {
+            fadeToColor(pixels.Color((int)(((double)(last)/100)*250), (int)(((double)(last)/100)*155), (int)(((double)(last)/100)*0)), 
+            pixels.Color((int)(((double)(last)/100)*252), (int)(((double)(last)/100)*124), (int)(((double)(last)/100)*214)), 40);
+            
+          }
+        }
         (*lastColour) = 2;
 
         for(int per = last; (((per < maxPercent) && (flag == 1)) || ((per > maxPercent) && (flag ==-1))); per+=flag)
@@ -203,6 +215,9 @@ void loop()
             delay(TIME_PER_HALFHOUR);
             thruHalfHours(i, last, lastColour, 4);
           }
+          else{
+            delay(5000);
+          }
           
         }
         else if (rawList[i] > 0.5)
@@ -218,6 +233,9 @@ void loop()
             thruHalfHours(i, last, lastColour, 4);
             iterateThruPercent(i, 100, last, &lastColour);
             last = 100;
+          }
+          else{
+            delay(5000);
           }
 
         }

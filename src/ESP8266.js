@@ -10,7 +10,7 @@ function ESP8266(props) {
 
     function sendValue() {
         // Use fetch() to send an HTTP request to the ESP8266 module
-        fetch(`http://192.168.2.32/sld?sliderValue=${sliderValue}`, { mode: 'no-cors' })
+        fetch(`http://172.20.10.6/sld?sliderValue=${sliderValue}`, { mode: 'no-cors' })
             .then((response) => {
                 console.log("Sent Slider Value to ESP8266.")
             })
