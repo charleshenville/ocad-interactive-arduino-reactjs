@@ -22,6 +22,7 @@ function App() {
   const [demoVisible, setDemoVisible] = useState(false);
   const [demoIndex, setDemoIndex] = useState(0);
   const [thumbPos, setThumbPos] = useState(0);
+  const [toESP, setToESP] = useState(0);
   const [weatherString, setweatherString] = useState('Night');
 
   function wait(delay) {
@@ -57,6 +58,7 @@ function App() {
 
   async function handleDemoClick() {
 
+    setToESP(1);
     setButtonsDisabled(true);
     let i = 1;
     while (i < 25) {
@@ -114,12 +116,15 @@ function App() {
     setButtonsDisabled(false);
   }
   function handlePeakClick() {
+    setToESP(2);
     handleSliderChange(11);
   }
   function handleLastClick() {
+    setToESP(3);
     handleSliderChange(16);
   }
   function handleOffClick() {
+    setToESP(4);
     handleSliderChange(0);
   }
 
@@ -208,7 +213,7 @@ function App() {
 
         </div>
       </header>
-      <ESP8266 sliderValue={sliderValue} />
+      <ESP8266 sliderValue={toESP} />
     </div>
   );
 }
